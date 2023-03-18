@@ -20,3 +20,12 @@ def is_game_over():
     else:
         return False
 
+
+def is_valid_move(player, hole): #Nick
+    if player == 1 and hole < 6 and board[hole] != 0:
+        return True
+    elif player == 2 and hole > 6 and hole < 13 and board[hole] != 0:
+        return True
+    else:
+        return False
+
