@@ -13,4 +13,10 @@ def print_board():
     print("\n")
     print("   {0}{1}{2}{3}{4}{5}")
 
+# method to check if the game is over or not
+def is_game_over():
+    if sum(board[0:6]) == 0 or sum(board[7:13]) == 0:
+        return True
+    else:
+        return False
 
