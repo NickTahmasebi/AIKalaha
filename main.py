@@ -21,7 +21,7 @@ def is_game_over():
         return False
 
 
-def is_valid_move(player, hole): #Nick
+def is_valid_move(player, hole):
     if player == 1 and hole < 6 and board[hole] != 0:
         return True
     elif player == 2 and hole > 6 and hole < 13 and board[hole] != 0:
@@ -29,7 +29,7 @@ def is_valid_move(player, hole): #Nick
     else:
         return False
 
-def make_move(player, hole): #Hylle
+def make_move(player, hole):
     stones = board[hole]
     board[hole] = 0
     while stones > 0:
