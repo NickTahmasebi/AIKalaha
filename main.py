@@ -43,3 +43,11 @@ def make_move(player, hole):
 
 def evaluate(board):
     return board[6] - board[13]
+
+def generate_moves(board):
+    moves = []
+    for i in range(6):
+        if board[i] != 0:
+            moves.append(i)
+    return moves
+
