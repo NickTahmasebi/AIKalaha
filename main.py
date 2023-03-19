@@ -51,3 +51,28 @@ def generate_moves(board):
             moves.append(i)
     return moves
 
+def apply_move(board, move):
+    player = board[13]
+    nextBoard = board.copy()
+    seeds = nextBoard[move]
+    nextBoard[move] = 0
+    i = move + 1
+    while seeds > 0:
+        if i == 12 and player == 0:
+            i = 0
+        elif i == 5 and player == 1:
+            i = 7
+        nextBoard[i] += 1
+        seeds -= 1
+        i = (i + 1) % 14
+    if i == 5 and player == 0:
+        nextBoard[5] += 1
+    elif i == 12 and player == 1:
+        nextBoard[12] += 1
+    elif nextBoard[i] == 1 and ((i < 5 and player == 0) or (i > 5 and i < 12 and player == 1)):
+        opposite = 11 - i
+        nextBoard[player * 7 + 5] += nextBoard[opposite] + 1
+        nextBoard[opposite] = 0
+    nextBoard[13] = 1 - player
+    return nextBoard
+
