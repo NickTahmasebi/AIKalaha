@@ -29,3 +29,14 @@ def is_valid_move(player, hole): #Nick
     else:
         return False
 
+def make_move(player, hole): #Hylle
+    stones = board[hole]
+    board[hole] = 0
+    while stones > 0:
+        hole = (hole + 1) % 14
+        if player == 1 and hole == 13:
+            continue
+        if player == 2 and hole == 6:
+            continue
+        board[hole] += 1
+        stones -= 1
