@@ -40,3 +40,6 @@ def make_move(player, hole): #Hylle
             continue
         board[hole] += 1
         stones -= 1
+
+def evaluate(board):
+    return board[6] - board[13]
