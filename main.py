@@ -96,3 +96,16 @@ def minimax(board, depth, maxPlayer):
             bestValue = min(bestValue, value)
         return bestValue
 
+
+
+def choose_move(board, depth):
+    moves = generate_moves(board)
+    bestValue = -float("inf")
+    bestMove = None
+    for move in moves:
+        nextBoard = apply_move(board, move)
+        value = minimax(nextBoard, depth-1, False)
+        if value > bestValue:
+            bestValue = value
+            bestMove = move
+    return bestMove
