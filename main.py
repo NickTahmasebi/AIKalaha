@@ -1,5 +1,6 @@
 board = [4, 4, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 0]
 
+#This method just prints the initial board
 def print_board():
     print("  {12}{11}{10}{9}{8}{7}\n")
 
@@ -13,14 +14,14 @@ def print_board():
     print("\n")
     print("   {0}{1}{2}{3}{4}{5}")
 
-# method to check if the game is over or not
+# Method to check if the game is over or not
 def is_game_over():
     if sum(board[0:6]) == 0 or sum(board[7:13]) == 0:
         return True
     else:
         return False
 
-
+#Checks if player one chooses a hole from 0-6 and player two from 7-12
 def is_valid_move(player, hole):
     if player == 1 and hole < 6 and board[hole] != 0:
         return True
@@ -29,6 +30,7 @@ def is_valid_move(player, hole):
     else:
         return False
 
+#Puts stones in the correct holes after a move is chosen
 def make_move(player, hole):
     stones = board[hole]
     board[hole] = 0
@@ -41,9 +43,11 @@ def make_move(player, hole):
         board[hole] += 1
         stones -= 1
 
+#Compares the goals of player 1 and 2
 def evaluate(board):
     return board[6] - board[13]
 
+#Generates a list of valid moves for player 1
 def generate_moves(board):
     moves = []
     for i in range(6):
@@ -51,6 +55,7 @@ def generate_moves(board):
             moves.append(i)
     return moves
 
+#Returns a board after a move would have been made, to be used by minimax to find the best move
 def apply_move(board, move):
     player = board[13]
     nextBoard = board.copy()
@@ -77,7 +82,7 @@ def apply_move(board, move):
     return nextBoard
 
 
-# the minimax algo to find the best move for the player.
+# the minimax algo to find the value of a designated move for player 1.
 def minimax(board, depth, maxPlayer):
     if depth == 0 or board[6] == 0 or board[13] == 0:
         return evaluate(board)
@@ -97,6 +102,7 @@ def minimax(board, depth, maxPlayer):
             bestValue = min(bestValue, value)
         return bestValue
 
+#Method uses the minimax method with a designated depth and selects the move with the highest value
 def choose_move(board, depth):
     moves = generate_moves(board)
     bestValue = -float("inf")
@@ -109,7 +115,7 @@ def choose_move(board, depth):
             bestMove = move
     return bestMove
 
-
+#Just the gameloop that runs until the game is over
 def play_game():
     player = 1
     while not is_game_over():
@@ -129,7 +135,7 @@ def play_game():
                 player = 1
         else:
             print("Invalid move. Please try again. ")
-
+#Method compares the final score between player 1 and 2
 def determine_winner():
     if board[6] > board[13]:
         print("Player 1 wins!")
@@ -137,8 +143,6 @@ def determine_winner():
         print("Player 2 wins!")
     else:
         print("It's a tie!")
-
-
 
 play_game()
 determine_winner()
