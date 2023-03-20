@@ -82,6 +82,7 @@ def minimax(board, depth, maxPlayer):
     if depth == 0 or board[6] == 0 or board[13] == 0:
         return evaluate(board)
     if maxPlayer:
+
         bestValue = -float("inf")
         for move in generate_moves(board):
             nextBoard = apply_move(board, move)
@@ -96,8 +97,6 @@ def minimax(board, depth, maxPlayer):
             bestValue = min(bestValue, value)
         return bestValue
 
-
-
 def choose_move(board, depth):
     moves = generate_moves(board)
     bestValue = -float("inf")
@@ -109,3 +108,27 @@ def choose_move(board, depth):
             bestValue = value
             bestMove = move
     return bestMove
+
+
+def play_game():
+    player = 1
+    while not is_game_over():
+        print_board()
+        move = choose_move(board, 8)
+        if player==1:
+            print("Best move:", move)
+            hole = int(input("Player " + str(player) + ", choose a hole (0-5):  "))
+        else:
+            hole = int(input("Player " + str(player) + ", choose a hole (7-12):  "))
+
+        if is_valid_move(player, hole):
+            make_move(player, hole)
+            if player == 1:
+                player = 2
+            else:
+                player = 1
+        else:
+            print("Invalid move. Please try again. ")
+
+
+play_game()
