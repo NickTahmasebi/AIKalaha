@@ -76,3 +76,7 @@ def apply_move(board, move):
     nextBoard[13] = 1 - player
     return nextBoard
 
+def minimax(board, depth, maxPlayer):
+    """Apply the minimax algorithm to determine the best move for the current player."""
+    if depth == 0 or board[6] == 0 or board[13] == 0:
+        return evaluate(board)
