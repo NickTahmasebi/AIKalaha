@@ -130,5 +130,15 @@ def play_game():
         else:
             print("Invalid move. Please try again. ")
 
+def determine_winner():
+    if board[6] > board[13]:
+        print("Player 1 wins!")
+    elif board[6] < board[13]:
+        print("Player 2 wins!")
+    else:
+        print("It's a tie!")
+
+
 
 play_game()
+determine_winner()
