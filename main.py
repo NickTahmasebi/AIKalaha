@@ -87,3 +87,11 @@ def minimax(board, depth, maxPlayer):
             value = minimax(nextBoard, depth-1, False)
             bestValue = max(bestValue, value)
         return bestValue
+    else:
+        bestValue = float("inf")
+        for move in generate_moves(board):
+            nextBoard = apply_move(board, move)
+            value = minimax(nextBoard, depth-1, True)
+            bestValue = min(bestValue, value)
+        return bestValue
+
