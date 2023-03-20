@@ -80,3 +80,10 @@ def minimax(board, depth, maxPlayer):
     """Apply the minimax algorithm to determine the best move for the current player."""
     if depth == 0 or board[6] == 0 or board[13] == 0:
         return evaluate(board)
+    if maxPlayer:
+        bestValue = -float("inf")
+        for move in generate_moves(board):
+            nextBoard = apply_move(board, move)
+            value = minimax(nextBoard, depth-1, False)
+            bestValue = max(bestValue, value)
+        return bestValue
